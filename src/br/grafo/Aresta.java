@@ -4,12 +4,8 @@ package br.grafo;
 public class Aresta implements Comparable<Aresta> {
 	
 	public Vertice v[] = { null, null };
-//	public ArestaInfo info = new ArestaInfo();
-//	public float peso = 0;
 	public float fuv = 0;
-//	public float tmp = 0;
 	public float cuv = 0;
-//	public boolean reverse = false; // esta aresta eh reversa??
 	
 	public Aresta( Vertice v1, Vertice v2, float w ) {
 		setInfo( v1, v2, w );

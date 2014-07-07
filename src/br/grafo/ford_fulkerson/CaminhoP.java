@@ -17,11 +17,9 @@ public class CaminhoP {
 		return msg;
 	}
 	
-	public void add(Aresta a, boolean rev) {
+	public void add( Aresta a, Vertice v ) {
 		caminho.add(a);
-		if (rev) {
-			
-		} else {
+		if( v.equals( a.v[1] ) ) {
 			float capResult = a.cuv - a.fuv;
 			if (capResult < fluxoMaximo) {
 				fluxoMaximo = capResult;

@@ -10,8 +10,6 @@ import br.grafo.Grafo;
 import br.grafo.Vertice;
 
 public class FordFulkerson extends Grafo {
-//	protected int vi = 0;
-//	protected int vf = 0;
 	public Vertice inicio = null;
 	protected Vertice fim = null;
 	public List<CaminhoP> lp = new ArrayList<CaminhoP>();	
@@ -57,83 +55,30 @@ public class FordFulkerson extends Grafo {
 		setVerticeInicial( s );
 		setVerticeFinal( t );
 	}
-
-/*	
-	public boolean findPath( Aresta umaA ) {
-		if( this.equals( umaA.v[0] ) && ) {
-			umP.add( t );
-		}
-		info.color = Color.GRAY;
-		List<Aresta> la = getAdjacentes();
-		for( Aresta a : getAdjacentes() ) {
-			Vertice v = a.v[0];
-			if( v.equals( this ) ) {
-				
-			}
-			
-		}
-		
-		return false;
-		
-	}
-*/
-
-	/*
-	u.info.color = Color.GRAY;
-	u.info.du = ++time;
-	for( Aresta a : u.getAdjacentes() ) {
-		Vertice v = null;
-
-		v = a.v[0];
-		if( v.equals( u ) ) {				
-			v = a.v[1];
-			if( directed ) {
-				a.reverse = true;
-			}
-		}
-
-		if( v.info.color != Color.WHITE )
-			continue;
-		v.info.pi = u;
-		visite( v );
-	}
-	u.info.color = Color.BLACK;
-	u.info.fu = ++time; */	
 	
 	public boolean visite( Vertice u, CaminhoP umP ) {
 
 		if( u.equals( fim ) )
 			return true;
 
-		u.info.color = Color.GRAY;
+		u.visited = true;
 		List<Aresta> la = u.getAdjacentes();
 		Collections.sort( la );
 		Collections.reverse( la ); // ordena do maior para o menor... ;o)
-		boolean reverse = false;
 		for( Aresta a : la ) {  // pega cada um dos adjacentess..
+
 			Vertice v = a.v[1];
-			reverse = false;
-			
 			if( v.equals( u ) ) { // precisa verificar se eh uma aresta direta ou reversa
 				v = a.v[0];
-				if( directed ) {
-					reverse = true;
-				}
 			}
 			
 			// caso o vertice jah esteja visitado, vai para o próximo
-			if( v.info.color != Color.WHITE )
+			// caso a capacidade da aresta for menor/igual ao fluxo, não faz nada...
+			if( v.visited || a.cuv <= a.fuv )
 				continue;
 
-			if( a.cuv <= a.fuv ) {
-				// caso a capacidade da aresta for menor/igual ao fluxo, não faz nada...
-				continue;
-			}
-
-			v.info.pi = u;
-			v.info.color = Color.GRAY;
 			if( visite( v, umP ) ) {
-				umP.add( a, reverse );
+				umP.add( a, v );
 				return true;
 			}
 		}
@@ -157,13 +102,4 @@ public class FordFulkerson extends Grafo {
 		}
 	}
 
-	public boolean isSpecialChar(char c) {
-		return super.isSpecialChar(c) || "*&".indexOf( c ) >= 0;
-	}
-
-	public void executeSpecialChar(String line) throws Exception {
-		super.executeSpecialChar( line );
-		switch( line.charAt( 0 ) ) {
-		}
-	}
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 import br.grafo.ford_fulkerson.CaminhoP;
 
-public class Vertice implements Comparable<Vertice>{
+public class Vertice {
 	protected int id = 0;
 	public String label = "";
-	public VerticeInfo info = new VerticeInfo();
+	public boolean visited = false;
 	List<Aresta> adjacentes = new ArrayList<Aresta>();
 	
 	public int getId() {
@@ -17,11 +17,11 @@ public class Vertice implements Comparable<Vertice>{
 	}
 	
 	public void clear() {
-		info.clear();
+		visited = false;
 	}
 	
 	public boolean equals( Vertice v ) {
-		if( id==v.id && info.equals(v.info) && label.equals( v.label ) )
+		if( id==v.id && label.equals( v.label ) )
 			return true;
 		return false;
 	}
@@ -44,16 +44,6 @@ public class Vertice implements Comparable<Vertice>{
 	
 	public String toString() {
 		String msg = label;
-//		for( Aresta a : adjacentes ) {
-//			msg += a.v[1].label + ",";
-//		}
-//		msg = msg.substring( 0, msg.length() - 1 );
-//		msg += ")"+info;
 		return msg;
-	}
-
-	@Override
-	public int compareTo(Vertice v) {
-		return info.compareTo( v.info );
 	}
 }
