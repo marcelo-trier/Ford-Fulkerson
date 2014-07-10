@@ -8,12 +8,19 @@ import br.grafo.Aresta;
 import br.grafo.Vertice;
 
 public class CaminhoP {
+	static int contadorCaminhos = 1;
+	
+	int id = 0;
 	float fluxoMaximo = 999;
 	List<Aresta> caminho = new ArrayList<Aresta>();
 
+	public CaminhoP() {
+		id = contadorCaminhos++;
+	}
+	
 	public String toString() {
 		String msg;
-		msg = "\nP[FM:" + fluxoMaximo + "]: " + caminho;
+		msg = "\nP" + id + " [FM:" + fluxoMaximo + "]: " + caminho;
 		return msg;
 	}
 	
